@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- saved from url=(0453)https://www.governing.com/templates/gov_2017_ad_iframe.html#%7B%22divId%22%3A%22ad_id_1554243922450%22%2C%22adUnit%22%3A%22I1%22%2C%22adSizes%22%3A%5B%5B640%2C480%5D%2C%5B300%2C250%5D%2C%5B970%2C250%5D%5D%2C%22contentId%22%3A377150881%2C%22site%22%3A%22www.governing.com%22%2C%22path%22%3A%22columns_tech-talk%22%2C%22URLName%22%3A%5B%22columns_tech-talk%22%2C%22gov%22%2C%22data%22%2C%22analytics%22%2C%22failure%22%5D%2C%22networkCode%22%3A70114778%7D -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title></title>
+	<style>
+	body, html {
+		margin:0;
+		padding:0;
+	}
+	</style>
+<link rel="preload" href="./f.txt" as="script"><script src="./osd.js.download"></script><script src="./pubads_impl_rendering_2019032901.js.download"></script><script type="text/javascript" src="./f.txt"></script><script src="./pubads_impl_2019032901.js.download" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-32/html/container.html?n=1"></head>
+
+<body>
+	<pre id="adData" style="display:none">{
+	"divId": "ad_id_1554243922450",
+	"adUnit": "I1",
+	"adSizes": [
+		[
+			640,
+			480
+		],
+		[
+			300,
+			250
+		],
+		[
+			970,
+			250
+		]
+	],
+	"contentId": 377150881,
+	"site": "www.governing.com",
+	"path": "columns_tech-talk",
+	"URLName": [
+		"columns_tech-talk",
+		"gov",
+		"data",
+		"analytics",
+		"failure"
+	],
+	"networkCode": 70114778
+}</pre>
+	<pre id="dfpResponseData" style="display:none"></pre>
+	<div id="ad" data-google-query-id="CPOpvOe5suECFUs9TwodRIkEfw"><div id="google_ads_iframe_/70114778/I1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/70114778/I1_0" title="3rd party ad content" name="google_ads_iframe_/70114778/I1_0" width="640" height="480" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" data-google-container-id="5oqhatsspeym" style="border: 0px; vertical-align: bottom;" data-load-complete="true" src="./saved_resource.html"></iframe></div></div>
+	<script async="" src="./gpt.js.download"></script><script>
+
+	var adData = JSON.parse(decodeURIComponent(window.location.hash.substr(1)));
+	// --> DFP needs to think this ad is loading on the page and not in an iframe.
+	// history.replaceState({}, "Real Page", window.parent.location.pathname);
+	// document.getElementsByTagName('title')[0].text = adData.pageTitle;
+	// document.baseURI = adData.baseURI;
+	// document.URL = adData.URL;
+	// document.documentURI =  adData.baseURI;
+
+	// --> load the google tag service
+	var googletag = googletag || {};
+	googletag.cmd = googletag.cmd || [];
+	(function() {
+		var gads = document.createElement('script');
+		gads.async = true;
+		var useSSL = 'https:' == document.location.protocol;
+		gads.src = (useSSL ? 'https:' : 'http:') +
+		'//www.googletagservices.com/tag/js/gpt.js';
+		var node = document.getElementsByTagName('script')[0];
+		node.parentNode.insertBefore(gads, node);
+	})();
+
+	googletag.cmd.push(function() {
+		var pubads = googletag.pubads();
+		// remove the first slash from the path.
+		console.log("b: "+adData.path);
+		adData.path = adData.path[0] === '_' ? adData.path.slice(1) : adData.path;
+		console.log("a: "+adData.path);
+		document.getElementById('adData').innerHTML = JSON.stringify(adData, null, '\t');
+		//console.log(adUnit, adSizes, contentId, site, path);
+		var gtAdOb = googletag.defineSlot('/'+adData.networkCode+'/'+adData.adUnit, adData.adSizes, 'ad')
+			.addService(pubads)
+			.setTargeting('id', [adData.contentId])
+			.setTargeting('path', [adData.path])
+			.setTargeting('site', [adData.site])
+			.setTargeting('URLName', adData.URLName);
+
+		if( typeof adData.sector !== 'undefined' && adData.sector !== '' ) {
+			gtAdOb.setTargeting('sector', [adData.sector]);
+		}
+
+		if( typeof adData.email !== 'undefined' && adData.URLName !== '' ) {
+			gtAdOb.setTargeting('email', [email]);
+		}
+
+		pubads.set('page_url', window.parent.location.href );
+		//pubads.setCorrelator(Number(correlator));
+
+		googletag.enableServices();
+		googletag.display('ad');
+
+		pubads.addEventListener('slotRenderEnded', function(event){
+
+			if( event.isEmpty ){
+				// TODO: find out what we should really do in this case. hiding the ad will cause the page to re-flow
+				// that is a BAD THING.
+				window.parent.postMessage({
+					divId: adData.divId,
+					//loadedSize: event.size
+					adLoaded: false
+				}, '*');
+			} else {
+				//console.log('loaded');
+				console.log(event);
+				// --> send the size up to the parent so the frame can be resized if needed.
+				window.parent.postMessage({
+					divId: adData.divId,
+					loadedSize: event.size,
+					adLoaded: true
+				}, '*');
+			}
+			// We're adding the response data to a hidden script tag for easier debugging.
+			// This tag is found directly adjacent to the ad on the event that the ad loads.
+			//document.getElementById('dfpResponseData').innerHTML = JSON.stringify(event, null, '\t');
+		});
+	});
+
+	</script>
+
+
+
+<iframe id="google_osd_static_frame_4456466838889" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./saved_resource(1).html"></iframe></body></html>
